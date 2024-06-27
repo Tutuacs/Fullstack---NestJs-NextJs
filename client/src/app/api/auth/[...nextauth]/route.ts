@@ -20,7 +20,7 @@ async function refreshToken(token: JWT): Promise<JWT> {
   };
 }
 
-const nextAuthOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -94,6 +94,6 @@ const nextAuthOptions: NextAuthOptions = {
   }
 };
 
-const handler = NextAuth(nextAuthOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST, nextAuthOptions };
