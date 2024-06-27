@@ -1,4 +1,4 @@
-import { nextAuthOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
@@ -7,7 +7,7 @@ interface PrivateLayoutProps {
 }
 
 export default async function PrivateLayout({ children }: PrivateLayoutProps) {
-  const session = await getServerSession(nextAuthOptions);
+  const session = await getServerSession(authOptions);
 
   if (session) {
     redirect("/");
