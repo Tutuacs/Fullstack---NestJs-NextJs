@@ -1,4 +1,4 @@
-import { nextAuthOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { ROLE } from "@/common/role.enums";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export default async function Navbar() {
-  const session = await getServerSession(nextAuthOptions);
+  const session = await getServerSession(authOptions);
 
   if (session) {
     if (session.profile.role === ROLE.ADMIN) {
