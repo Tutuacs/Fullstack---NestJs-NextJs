@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
+import Carrossel from '@/components/Carrossel';
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
         <section className="w-10/12">
           <div className="flex items-center justify-center h-screen bg-gray-200">
             <h1 className="text-6xl text-black">Seu Site</h1>
+            <Carrossel/>
           </div>
         </section>
         <section className="w-2/12 bg-gray-200 hover:bg-gradient-to-l hover:from-gray-400 hover:to-gray-200">
