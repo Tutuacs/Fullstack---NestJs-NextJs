@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const products = [
@@ -27,6 +28,7 @@ const products = [
 export default function Carrossel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [intervalDelay, setIntervalDelay] = useState(5000);
+  const [itemsPerPage, setItemsPerPage] = useState(4);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,60 +37,88 @@ export default function Carrossel() {
     return () => clearInterval(interval);
   }, [intervalDelay]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth <= 1024) {
+        setItemsPerPage(3);
+      } else {
+        setItemsPerPage(4);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 4) % products.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % products.length);
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 4 + products.length) % products.length);
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + products.length) % products.length
+    );
   };
 
   const handleNextClick = () => {
     nextSlide();
-    setIntervalDelay(80000); // Delay increased to 10 seconds after clicking
+    setIntervalDelay(10000)
     setTimeout(() => {
-      setIntervalDelay(5000); // Revert back to 5 seconds after delay
+      setIntervalDelay(5000);
     }, 10000);
   };
 
   const handlePrevClick = () => {
     prevSlide();
-    setIntervalDelay(80000); // Delay increased to 10 seconds after clicking
+    setIntervalDelay(10000);
     setTimeout(() => {
-      setIntervalDelay(5000); // Revert back to 5 seconds after delay
+      setIntervalDelay(5000);
     }, 10000);
   };
 
   const visibleProducts = products
-    .slice(currentIndex, currentIndex + 4)
-    .concat(products.slice(0, Math.max(0, currentIndex + 4 - products.length)));
+    .slice(currentIndex, currentIndex + itemsPerPage)
+    .concat(products.slice(0, Math.max(0, currentIndex + itemsPerPage - products.length)));
 
   return (
-    <div className="relative w-full h-64 overflow-hidden bg-slate-100">
-      <div className="absolute top-0 left-0 flex w-full h-full transition-transform duration-500 ease-in-out">
-        {visibleProducts.map((product) => (
-          <div key={product.id} className="flex-shrink-0 w-1/4 p-4 pb-10">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="object-cover w-full h-full rounded-lg"
-            />
-            <h3 className="mt-1 text-center">{product.name}</h3>
-          </div>
-        ))}
+    <>
+      <div className="w-8/12 p-4 text-4xl text-center text-white rounded-t-md bg-slate-800">
+        Ultimos produtos adicionados
       </div>
-      <button
-        onClick={handlePrevClick}
-        className="absolute left-0 px-4 py-64 text-white transform -translate-y-1/2 rounded-lg from-transparent to-gray-300 bg-gradient-to-l top-1/2 hover:to-gray-400"
-      >
-        Anterior
-      </button>
-      <button
-        onClick={handleNextClick}
-        className="absolute right-0 px-4 py-64 text-white transform -translate-y-1/2 rounded-lg from-transparent to-gray-300 bg-gradient-to-r top-1/2 hover:to-gray-400"
-      >
-        Próxima
-      </button>
-    </div>
+      <div className="relative w-8/12 overflow-hidden h-80 bg-slate-100">
+        <div className="absolute top-0 flex justify-center w-full h-full transition-transform duration-500 ease-in-out">
+          {visibleProducts.map((product) => (
+            <div key={product.id} className={`flex-shrink-0 p-4 pb-10 w-${100/itemsPerPage}%`}>
+              <Link href={`/products/${product.id}`} >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="object-cover w-full h-full rounded-t-lg"
+                />
+              <h3 className="py-1 mt-0 text-center text-white rounded-b-lg bg-slate-800">{product.name}</h3>
+                </Link>
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={handlePrevClick}
+          className="absolute left-0 px-4 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-l top-1/2 hover:to-gray-400"
+        >
+          Anterior
+        </button>
+        <button
+          onClick={handleNextClick}
+          className="absolute right-0 px-4 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-r top-1/2 hover:to-gray-400"
+        >
+          Próximo
+        </button>
+      </div>
+    </>
   );
 }
