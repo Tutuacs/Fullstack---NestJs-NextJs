@@ -29,7 +29,7 @@ export default async function Navbar() {
   }
 
   return (
-    <main className="flex justify-between pt-2 shadow-lg bg-slate-800">
+    <main className="flex justify-between pt-2 bg-green-500 shadow-lg">
       <div className="flex items-center">
         <Link className="py-1" href="/">
           <Image
@@ -39,9 +39,20 @@ export default async function Navbar() {
             height={40}
           />
         </Link>
-        <Link href="/products" className="p-4 my-0 ml-2 text-2xl font-bold text-white hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200">Produtos</Link>
       </div>
       <div className="flex items-center mr-2">
+        <Link
+          className="p-4 my-0 text-2xl font-bold text-white hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200"
+          href="/products"
+        >
+          Produtos
+        </Link>
+        <Link
+          className="p-4 my-0 text-2xl font-bold text-white hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200"
+          href="/trucks"
+        >
+          Caminhões
+        </Link>
         <Link
           className="p-4 my-0 text-2xl font-bold text-white hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200"
           href="/login"

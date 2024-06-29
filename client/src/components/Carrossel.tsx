@@ -3,25 +3,65 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const products = [
-  { id: 1, image: "https://via.placeholder.com/300", name: "Product 1" },
+  {
+    id: 1,
+    image:
+      "https://mockup-api.teespring.com/v3/image/2NgQ1ZAAW-l7xCRHhBDvI1B1C8U/800/800.jpg",
+    name: "Product 1",
+  },
   { id: 2, image: "https://via.placeholder.com/300", name: "Product 2" },
-  { id: 3, image: "https://via.placeholder.com/300", name: "Product 3" },
+  {
+    id: 3,
+    image:
+      "https://mockup-api.teespring.com/v3/image/wcNwkS4Y-rtOKAuqwCsYaOw8Cv8/800/800.jpg",
+    name: "Product 3",
+  },
   { id: 4, image: "https://via.placeholder.com/300", name: "Product 4" },
   { id: 5, image: "https://via.placeholder.com/300", name: "Product 5" },
-  { id: 6, image: "https://via.placeholder.com/300", name: "Product 6" },
+  {
+    id: 6,
+    image:
+      "https://mockup-api.teespring.com/v3/image/btGArnfFfvESjsCyqh-RcuO3rr8/800/800.jpg",
+    name: "Product 6",
+  },
   { id: 7, image: "https://via.placeholder.com/300", name: "Product 7" },
   { id: 8, image: "https://via.placeholder.com/300", name: "Product 8" },
-  { id: 9, image: "https://via.placeholder.com/300", name: "Product 9" },
+  {
+    id: 9,
+    image:
+      "https://mockup-api.teespring.com/v3/image/9DxUJ2cP_LXHylWgTmXs6z84NXY/800/800.jpg",
+    name: "Product 9",
+  },
   { id: 10, image: "https://via.placeholder.com/300", name: "Product 10" },
   { id: 11, image: "https://via.placeholder.com/300", name: "Product 11" },
-  { id: 12, image: "https://via.placeholder.com/300", name: "Product 12" },
+  {
+    id: 12,
+    image:
+      "https://mockup-api.teespring.com/v3/image/eTcnVM9q_1-2jF_0bJ4NBa_rFKM/800/800.jpg",
+    name: "Product 12",
+  },
   { id: 13, image: "https://via.placeholder.com/300", name: "Product 13" },
   { id: 14, image: "https://via.placeholder.com/300", name: "Product 14" },
-  { id: 15, image: "https://via.placeholder.com/300", name: "Product 15" },
+  {
+    id: 15,
+    image:
+      "https://mockup-api.teespring.com/v3/image/aM870qcrxVLvHLnJPwu6w2olWKU/800/800.jpg",
+    name: "Product 15",
+  },
   { id: 16, image: "https://via.placeholder.com/300", name: "Product 16" },
-  { id: 17, image: "https://via.placeholder.com/300", name: "Product 17" },
+  {
+    id: 17,
+    image:
+      "https://mockup-api.teespring.com/v3/image/NGjr8zyNw7FCHuQYoryOEcl4GNk/800/800.jpg",
+    name: "Product 17",
+  },
   { id: 18, image: "https://via.placeholder.com/300", name: "Product 18" },
-  { id: 19, image: "https://via.placeholder.com/300", name: "Product 19" },
+  {
+    id: 19,
+    image:
+      "https://mockup-api.teespring.com/v3/image/_IvBZ0jhry5FAXEOWFw3ynpo8ig/800/800.jpg",
+    name: "Product 19",
+  },
   { id: 20, image: "https://via.placeholder.com/300", name: "Product 20" },
 ];
 
@@ -68,7 +108,7 @@ export default function Carrossel() {
 
   const handleNextClick = () => {
     nextSlide();
-    setIntervalDelay(10000)
+    setIntervalDelay(10000);
     setTimeout(() => {
       setIntervalDelay(5000);
     }, 10000);
@@ -84,37 +124,47 @@ export default function Carrossel() {
 
   const visibleProducts = products
     .slice(currentIndex, currentIndex + itemsPerPage)
-    .concat(products.slice(0, Math.max(0, currentIndex + itemsPerPage - products.length)));
+    .concat(
+      products.slice(
+        0,
+        Math.max(0, currentIndex + itemsPerPage - products.length)
+      )
+    );
 
   return (
     <>
-      <div className="w-8/12 p-4 text-4xl text-center text-white rounded-t-md bg-slate-800">
+      <div className="w-8/12 p-4 text-4xl text-center text-white bg-green-500 rounded-t-md">
         Ultimos produtos adicionados
       </div>
       <div className="relative w-8/12 overflow-hidden h-80 bg-slate-100">
         <div className="absolute top-0 flex justify-center w-full h-full transition-transform duration-500 ease-in-out">
           {visibleProducts.map((product) => (
-            <div key={product.id} className={`flex-shrink-0 p-4 pb-10 w-${100/itemsPerPage}%`}>
-              <Link href={`/products/${product.id}`} >
-              <img
-                src={product.image}
-                alt={product.name}
-                className="object-cover w-full h-full rounded-t-lg"
+            <div
+              key={product.id}
+              className={`flex-shrink-0 p-4 pb-10 w-${100 / itemsPerPage}%`}
+            >
+              <Link href={`/products/${product.id}`}>
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="object-cover w-full h-full rounded-t-lg max-w-[300px] max-h-[300px]"
                 />
-              <h3 className="py-1 mt-0 text-center text-white rounded-b-lg bg-slate-800">{product.name}</h3>
-                </Link>
+                <h3 className="py-1 mt-0 text-center text-white bg-green-800 rounded-b-lg">
+                  {product.name}
+                </h3>
+              </Link>
             </div>
           ))}
         </div>
         <button
           onClick={handlePrevClick}
-          className="absolute left-0 px-4 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-l top-1/2 hover:to-gray-400"
+          className="absolute left-0 px-3 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-l top-1/2 hover:to-gray-400"
         >
           Anterior
         </button>
         <button
           onClick={handleNextClick}
-          className="absolute right-0 px-4 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-r top-1/2 hover:to-gray-400"
+          className="absolute right-0 px-3 py-64 font-bold transform -translate-y-1/2 rounded-lg text-slate-800 from-transparent to-gray-300 bg-gradient-to-r top-1/2 hover:to-gray-400"
         >
           Próximo
         </button>
