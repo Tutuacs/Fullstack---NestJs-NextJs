@@ -133,7 +133,7 @@ export default function Carrossel() {
 
   return (
     <>
-      <div className="w-8/12 p-4 text-4xl text-center text-white bg-green-500 rounded-t-md">
+      <div className="w-8/12 p-4 text-4xl text-center text-white bg-green-800 rounded-t-md">
         Ultimos produtos adicionados
       </div>
       <div className="relative w-8/12 overflow-hidden h-80 bg-slate-100">

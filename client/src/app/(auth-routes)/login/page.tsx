@@ -53,9 +53,7 @@ export default function Login() {
       </div>
       <Link href="/register">
         <div className="flex p-8 m-auto text-2xl text-white rounded-b-lg hover:bg-slate-800 bg-slate-900 w-96 hover:text-green-400">
-          <div className="m-auto">
-          Não tenho cadastro
-          </div>
+          <div className="m-auto">Não tenho cadastro</div>
         </div>
       </Link>
     </main>

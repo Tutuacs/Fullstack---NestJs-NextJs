@@ -64,7 +64,7 @@ export default function Navbar() {
         </div>
       </main>
       {isOpen && (
-        <div className="absolute right-0 items-end w-32 mt-0 mr-0 bg-green-800 rounded-bl-lg md:hidden">
+        <div className={`absolute right-0 items-end w-[130px] mt-0 mr-0 bg-green-800 rounded-bl-lg md:hidden menu-open`}>
           <Link
             className="block p-4 my-0 mr-2 text-sm font-bold text-white rounded-r-lg hover:text-slate-800 hover:bg-gray-200"
             href="/magic-chat"
@@ -84,7 +84,7 @@ export default function Navbar() {
             Caminhões
           </Link>
           <Link
-            className="block p-4 my-0 mr-2 text-sm font-bold text-white rounded-r-lg hover:text-slate-800 hover:bg-gray-200"
+            className="block p-4 my-0 mr-2 text-sm font-bold text-white rounded-tr-lg hover:text-slate-800 hover:bg-gray-200"
             href="/login"
           >
             Login

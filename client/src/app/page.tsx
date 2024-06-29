@@ -14,7 +14,7 @@ export default function Home() {
           <div className="flex flex-col items-center bg-gray-200">
             <Image src="/banner.png" alt="home" width={1200} height={300} className="mt-10" />
             <h1 className="mb-10 text-6xl font-bold text-center text-black animate-pulse">
-              Morelate distribuidora de produtos
+              Morelate distribuidora de peças
             </h1>
             <Carrossel />
             <About />
