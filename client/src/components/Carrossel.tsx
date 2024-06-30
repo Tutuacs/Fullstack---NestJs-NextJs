@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
@@ -144,7 +145,9 @@ export default function Carrossel() {
               className={`flex-shrink-0 p-4 pb-10 w-${100 / itemsPerPage}%`}
             >
               <Link href={`/products/${product.id}`}>
-                <img
+                <Image
+                  width={300}
+                  height={300}
                   src={product.image}
                   alt={product.name}
                   className="object-cover w-full h-full rounded-t-lg max-w-[300px] max-h-[300px]"

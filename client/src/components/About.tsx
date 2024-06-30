@@ -1,10 +1,14 @@
+import Image from "next/image";
+
 export default function About() {
   return (
     <main className="flex flex-col items-center bg-gray-200">
       <div className="w-8/12 m-2 mt-10 bg-white rounded shadow ">
         <div className="flex flex-col items-center md:flex-row">
           <div className="w-full p-4 md:w-1/4">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               alt="logo"
               src="https://images.tcdn.com.br/img/editor/up/942823/logo_morelate_horizontal_a.png"
               className="w-full h-auto"
@@ -29,14 +33,18 @@ export default function About() {
       <div className="w-8/12 p-4 m-2 bg-white rounded shadow">
         <div className="flex flex-wrap">
           <div className="w-full p-2 md:w-1/2">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               alt="image1"
               src="https://images.tcdn.com.br/img/editor/up/942823/1DSC00825.JPG"
               className="w-full h-auto"
             />
           </div>
           <div className="w-full p-2 md:w-1/2">
-            <img
+            <Image
+              width={1000}
+              height={1000}
               alt="image2"
               src="https://images.tcdn.com.br/img/editor/up/942823/2DSC06836.JPG"
               className="w-full h-auto"
@@ -63,7 +71,9 @@ export default function About() {
       </div>
 
       <div className="w-8/12 p-4 m-2 bg-white rounded shadow">
-        <img
+        <Image
+          width={1000}
+          height={1000}
           alt="mvv"
           src="https://imagens.morelate.com.br/banner_mvv.png"
           className="w-full h-auto"
@@ -126,7 +136,9 @@ export default function About() {
 
       <div className="w-8/12 p-4 m-2 bg-white rounded shadow">
         <a href="https://imagens.morelate.com.br/Certificado-ISO9001-2015-Morelate-Maxi-Parts-2023.pdf">
-          <img
+          <Image
+            width={1000}
+            height={1000}
             alt="ISO Certificate"
             src="http://imagens.morelate.com.br/banner_iso.png"
             className="w-full h-auto"
@@ -240,7 +252,9 @@ export default function About() {
         <div key={index} className="w-8/12 p-4 m-2 bg-white rounded shadow">
           <div className="flex flex-col md:flex-row">
             <div className="w-full p-2 md:w-1/3">
-              <img
+              <Image
+                width={1000}
+                height={1000}
                 alt={location.title}
                 src={location.img}
                 className="w-full h-auto rounded-lg md:max-h-56 lg:max-h-96"

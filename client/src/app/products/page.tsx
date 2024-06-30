@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 type Product = {
   id: number;
@@ -196,6 +197,8 @@ export default function Products() {
                 <div className="absolute top-0 left-0 w-full h-4 bg-white"></div>
                 {/* Faixa cinza na parte esquerda */}
                 <div className="absolute top-0 left-0 w-4 h-full bg-white"></div>
+                {/* Faixa cinza na parte direita */}
+                <div className="absolute top-0 right-0 w-4 h-full bg-white"></div>
 
                 {product.promotion && (
                   <div className="absolute w-24 text-xs font-bold text-center text-white transform -rotate-45 bg-red-600 top-[20px] -left-[20px]">
@@ -203,16 +206,18 @@ export default function Products() {
                   </div>
                 )}
 
-                <Link href={`/products/${product.id}`}>
-                  <img
+                {/* <Link href={`/products/${product.id}`}> */}
+                  <Image
                     src={product.image}
                     alt={product.name}
+                    width={300}
+                    height={300}
                     className="object-cover max-w-[300px] max-h-[300px] rounded-lg m-2 mx-auto"
                   />
                   <h3 className="mt-2 text-lg font-bold text-center">
                     {product.name}
                   </h3>
-                </Link>
+                {/* </Link> */}
 
                 <div className="mt-2 lg:mt-4 lg:text-center"></div>
               </div>

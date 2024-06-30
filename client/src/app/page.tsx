@@ -26,7 +26,7 @@ export default function Home() {
         className="flex items-center justify-center w-full h-24 bg-gray-900"
       >
         <p className="text-white">
-          © 2024 Seu Site. Todos os direitos reservados.
+          © 2024 Morelate. Todos os direitos reservados.
         </p>
       </footer>
     </main>
