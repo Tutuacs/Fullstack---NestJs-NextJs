@@ -1,142 +1,169 @@
 "use client";
+// type Props = {
+//     params: {
+//       id: string;
+//     };
+//   };
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-
-type Props = {
-    params: {
-      id: string;
-    };
-  };
+import Link from "next/link";
+import DetailsCarrossel from "../_components/Carrossel";
+import Footer from "@/components/Footer";
 
 type Product = {
   id: string;
   name: string;
+  color: string;
+  promotion: boolean;
   images: string[];
-  variants: string[];
+  variants?: Product[];
   price: number;
   details: string;
 };
 
-const fetchProductDetails = async (productId: string): Promise<Product> => {
-  // Simulated API call, replace with actual API fetch
-  const response = await fetch(`/api/product/${productId}`);
-  // if (!response.ok) {
-  //   throw new Error("Failed to fetch product details");
-  // }
-  if (response.status !== 200) {
-    const product = {
-      id: "19",
-      name: "Product 19",
-      images: [
-        "https://mockup-api.teespring.com/v3/image/2NgQ1ZAAW-l7xCRHhBDvI1B1C8U/800/800.jpg",
-        "https://mockup-api.teespring.com/v3/image/wcNwkS4Y-rtOKAuqwCsYaOw8Cv8/800/800.jpg",
-        "https://mockup-api.teespring.com/v3/image/_IvBZ0jhry5FAXEOWFw3ynpo8ig/800/800.jpg",
-      ],
-      variants: [
-        "20",
-        "21",
-      ],
-      price: 19.99,
-      details: "Product 19 details",
-    };
-
-    return product
-    
-  }
-  return response.json();
-};
-
-export default function ProductDetailsPage({ params }: Props) {
-  const [product, setProduct] = useState<Product | null>(null);
-  const [selectedVariantIndex, setSelectedVariantIndex] = useState(0);
-
-  useEffect(() => {
-    const loadProduct = async () => {
-      try {
-        const productData = await fetchProductDetails(params.id);
-        setProduct(productData);
-      } catch (error) {
-        console.error("Error fetching product details:", error);
-        // Handle error loading product
-      }
-    };
-    loadProduct();
-  }, [params.id]);
-
-  const handleVariantSelect = (index: number) => {
-    setSelectedVariantIndex(index);
+export default function ProductDetails() {
+  const initialProduct = {
+    id: "19",
+    name: "Product 19",
+    color: "black",
+    promotion: true,
+    images: [
+      "https://mockup-api.teespring.com/v3/image/2NgQ1ZAAW-l7xCRHhBDvI1B1C8U/800/800.jpg",
+      "https://mockup-api.teespring.com/v3/image/wcNwkS4Y-rtOKAuqwCsYaOw8Cv8/800/800.jpg",
+      "https://mockup-api.teespring.com/v3/image/_IvBZ0jhry5FAXEOWFw3ynpo8ig/800/800.jpg",
+    ],
+    variants: [
+      {
+        id: "20",
+        name: "Variant 1",
+        color: "red",
+        promotion: false,
+        images: [
+          "https://mockup-api.teespring.com/v3/image/wcNwkS4Y-rtOKAuqwCsYaOw8Cv8/800/800.jpg",
+          "https://mockup-api.teespring.com/v3/image/2NgQ1ZAAW-l7xCRHhBDvI1B1C8U/800/800.jpg",
+        ],
+        price: 20.99,
+        details: "Details for variant 1",
+      },
+      {
+        id: "21",
+        name: "Variant 2",
+        color: "white",
+        promotion: true,
+        images: [
+          "https://mockup-api.teespring.com/v3/image/_IvBZ0jhry5FAXEOWFw3ynpo8ig/800/800.jpg",
+          "https://mockup-api.teespring.com/v3/image/2NgQ1ZAAW-l7xCRHhBDvI1B1C8U/800/800.jpg",
+        ],
+        price: 24.99,
+        details: "Details for variant 2",
+      },
+    ],
+    price: 19.99,
+    details: "Product 19 details",
   };
 
-  const handlePrevImage = () => {
-    setSelectedVariantIndex((prevIndex) =>
-      prevIndex === 0 ? (product?.images?.length ?? 0) - 1 : prevIndex - 1
+  const [product, setProduct] = useState<Product>(initialProduct);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleVariantChange = (selectedProduct: Product) => {
+    setProduct(selectedProduct);
+    setCurrentImageIndex(0);
+  };
+
+  const handlePreviousImage = () => {
+    setCurrentImageIndex(
+      (prevIndex) =>
+        (prevIndex - 1 + product.images.length) % product.images.length
     );
   };
-  
+
   const handleNextImage = () => {
-    setSelectedVariantIndex((prevIndex) =>
-      prevIndex === (product?.images?.length ?? 0) - 1 ? 0 : prevIndex + 1
+    setCurrentImageIndex(
+      (prevIndex) => (prevIndex + 1) % product.images.length
     );
   };
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
+  const products = [product];
 
   return (
-    <div className="flex flex-col md:flex-row md:space-x-4">
-      {/* Product Card */}
-      <div className="flex-1 max-w-md mx-auto">
-        <div className="relative">
-          <button className="absolute top-0 left-0 p-2 m-2 bg-gray-200 rounded-lg" onClick={handlePrevImage}>
-            &lt;
-          </button>
-          <button className="absolute top-0 right-0 p-2 m-2 bg-gray-200 rounded-lg" onClick={handleNextImage}>
-            &gt;
-          </button>
-          <Image
-            src={product.images[selectedVariantIndex]}
-            alt={product.name}
-            width={400}
-            height={400}
-            className="object-cover rounded-lg"
-          />
-        </div>
-        <div className="flex justify-center mt-4 space-x-2">
-          {product.images.map((image, index) => (
-            <button
-              key={index}
-              onClick={() => handleVariantSelect(index)}
-              className={`p-2 rounded-lg ${
-                index === selectedVariantIndex ? "bg-gray-300" : "bg-gray-200"
-              }`}
-            >
-              <Image
-                src={image}
-                alt={product.name}
-                width={60}
-                height={60}
-                className="object-cover rounded-lg"
-              />
-            </button>
+    <main>
+      <div className="flex-col my-10 md:mx-4 lg:mx-10">
+        <div className="w-3/4 m-auto bg-white border-4 border-green-800 rounded-lg lg:flex sm:flex-col lg:flex-row md:flex">
+          {products.map((product: Product) => (
+            <>
+              <div className="m-4">
+                <div className="flex-row" key={product.id}>
+                  <div className="relative p-4 overflow-hidden bg-white rounded-lg shadow">
+                    {/* Faixa cinza na parte superior */}
+                    <div className="absolute top-0 left-0 w-full h-4 bg-white"></div>
+                    {/* Faixa cinza na parte esquerda */}
+                    <button
+                      onClick={handlePreviousImage}
+                      className="absolute top-0 left-0 w-8 h-full bg-gradient-to-r hover:from-slate-800 from-slate-500 to-transparent"
+                    ></button>
+                    {/* Faixa cinza na parte direita */}
+                    <button
+                      onClick={handleNextImage}
+                      className="absolute top-0 right-0 w-8 h-full bg-gradient-to-l hover:from-slate-800 from-slate-500 to-transparent"
+                    ></button>
+
+                    {product.promotion && (
+                      <div className="absolute w-24 text-xs font-bold text-center text-white transform -rotate-45 bg-red-600 top-[20px] -left-[20px]">
+                        Promoção
+                      </div>
+                    )}
+
+                    {/* <Link href={`/products/${product.id}`}> */}
+                    <Image
+                      src={product.images[currentImageIndex]}
+                      alt={product.name}
+                      width={300}
+                      height={300}
+                      className="object-cover max-w-[300px] max-h-[300px] rounded-lg m-2 mx-auto"
+                    />
+                    {/* </Link> */}
+
+                    <div className="mt-2 lg:mt-4 lg:text-center"></div>
+                  </div>
+                </div>
+              </div>
+              <div className="m-4">
+                <div className="mb-4 text-2xl font-bold">{product.name}</div>
+                <div className="mb-4 text-lg">R$ {product.price}</div>
+                <div className="mb-4 text-wrap">{product.details}</div>
+                <div className="flex mb-4 space-x-2">
+                  <button
+                    onClick={() => handleVariantChange(initialProduct)}
+                    className="w-8 h-8 border-2 border-green-800 rounded-full"
+                    style={{ backgroundColor: initialProduct.color }}
+                    title={initialProduct.name}
+                  ></button>
+                  {initialProduct.variants.map((variant) => (
+                    <button
+                      key={variant.id}
+                      onClick={() => handleVariantChange(variant)}
+                      className="w-8 h-8 border-2 border-green-800 rounded-full"
+                      style={{ backgroundColor: variant.color }}
+                      title={variant.name}
+                    ></button>
+                  ))}
+                </div>
+
+                <div>
+                  <button className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                    Comprar
+                  </button>
+                </div>
+              </div>
+            </>
           ))}
         </div>
-      </div>
-
-      {/* Product Details Card */}
-      <div className="flex-1 max-w-md mx-auto mt-4 md:mt-0">
-        <div className="p-4 bg-white rounded-lg shadow-md">
-          <h2 className="text-xl font-semibold">{product.name}</h2>
-          <p className="text-gray-600">${product.price.toFixed(2)}</p>
-          <p className="mt-4">{product.details}</p>
-          <button className="px-4 py-2 mt-4 font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
-            Adicionar ao Carrinho
-          </button>
+        <div className="w-3/4 m-auto my-10">
+          <DetailsCarrossel title="Produtos relacionados" />
         </div>
       </div>
-    </div>
+      <Footer />
+    </main>
   );
-};
-
-    
+}

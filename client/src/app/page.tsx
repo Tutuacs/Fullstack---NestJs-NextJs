@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Carrossel from "@/components/Carrossel";
 import Image from "next/image";
 import About from "@/components/About";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -16,19 +17,12 @@ export default function Home() {
             <h1 className="mb-10 text-6xl font-bold text-center text-black animate-pulse">
               Morelate distribuidora de peças
             </h1>
-            <Carrossel />
+            <Carrossel title="Ultimos produtos adicionados" />
             <About />
           </div>
         </section>
       </div>
-      <footer
-        id="footer"
-        className="flex items-center justify-center w-full h-24 bg-gray-900"
-      >
-        <p className="text-white">
-          © 2024 Morelate. Todos os direitos reservados.
-        </p>
-      </footer>
+      <Footer/>
     </main>
   );
 }

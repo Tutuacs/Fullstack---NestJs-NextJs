@@ -66,7 +66,7 @@ const products = [
   { id: 20, image: "https://via.placeholder.com/300", name: "Product 20" },
 ];
 
-export default function Carrossel({title}: {title: string}) {
+export default function DetailsCarrossel({title}: {title: string}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [intervalDelay, setIntervalDelay] = useState(5000);
   const [itemsPerPage, setItemsPerPage] = useState(4);
@@ -134,10 +134,10 @@ export default function Carrossel({title}: {title: string}) {
 
   return (
     <>
-      <div className="w-8/12 p-4 text-4xl text-center text-white bg-green-800 rounded-t-md">
+      <div className="w-full p-4 text-4xl text-center text-white bg-green-800 rounded-t-md">
         {title}
       </div>
-      <div className="relative w-8/12 overflow-hidden h-80 bg-slate-100">
+      <div className="relative overflow-hidden full h-80 bg-slate-100">
         <div className="absolute top-0 flex justify-center w-full h-full transition-transform duration-500 ease-in-out">
           {visibleProducts.map((product) => (
             <div
