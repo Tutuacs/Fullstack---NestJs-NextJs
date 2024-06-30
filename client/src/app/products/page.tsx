@@ -188,9 +188,8 @@ export default function Products() {
       <main className="p-4 md:w-3/4 lg:w-3/4 sm:w-2/4">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
           {products.map((product: Product) => (
-            <div className="flex-row">
+            <div className="flex-row" key={product.id}>
               <div
-                key={product.id}
                 className="relative p-4 overflow-hidden bg-white rounded-t-lg shadow"
               >
                 {/* Faixa cinza na parte superior */}
