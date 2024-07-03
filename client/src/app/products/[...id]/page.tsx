@@ -151,8 +151,8 @@ export default function ProductDetails() {
                 </div>
 
                 <div>
-                  <button className="w-full px-4 py-2 font-bold text-white bg-green-500 rounded-lg hover:bg-green-700 focus:outline-none focus:shadow-outline">
-                    Comprar
+                  <button className="px-4 py-2 font-bold text-white bg-green-500 rounded-lg md:w-full lg:w-32 hover:bg-green-700 focus:outline-none focus:shadow-outline">
+                    Adicionar ao carrinho
                   </button>
                 </div>
               </div>

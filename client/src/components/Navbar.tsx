@@ -16,12 +16,12 @@ export default function Navbar() {
       <main className="flex items-center justify-between pt-2 bg-green-500 shadow-lg">
         <div className="flex items-center">
           <Link className="py-1" href="/">
-            <Image
+            {/* <Image
               src="/logo_morelate_horizontal_b.png"
               alt="home"
               width={200}
               height={40}
-            />
+            /> */}
           </Link>
         </div>
         <div className={`flex items-center md:hidden ${
@@ -41,7 +41,7 @@ export default function Navbar() {
             className="p-4 my-0 text-lg font-bold text-white md:mr-0 hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200"
             href="/magic-chat"
           >
-            Chat magico
+            {/* Chat magico */}
           </Link>
           <Link
             className="p-4 my-0 text-lg font-bold text-white hover:rounded-t-lg hover:text-slate-800 hover:bg-gray-200"
